@@ -31,7 +31,8 @@ public class Empcontroller {
 			System.out.println("1. 사원전체정보 출력");
 			System.out.println("2. 사원검색출력");
 			System.out.println("3. 사원정보 추가");
-			System.out.println("4. 종료");
+			System.out.println("4. 사원 삭제");
+			System.out.println("5. 종료");
 			int select = sc.nextInt();
 			switch (select) {
 
@@ -64,6 +65,16 @@ public class Empcontroller {
 					s="사원정보추가성공";
 				}
 				empView.view(s);
+				break;
+				
+			case 4 :
+				empno = empInput.empnoInput();
+				select = empDAO.delete(empno);
+				String a="사원제거실패";
+				if(select>0) {
+					a="사원제거성공";
+				}
+				empView.view(a);
 				break;
 
 			default:

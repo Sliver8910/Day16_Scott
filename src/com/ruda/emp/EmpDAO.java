@@ -10,13 +10,41 @@ import com.ruda.util.DBConnector;
 
 public class EmpDAO {
 	
+	
+	//사원 제거
+	public int delete(int empno) {
+		Connection con = null;
+		PreparedStatement st = null;
+		int result = 0;
+		
+		try {
+			con = DBConnector.getConnect();
+			String sql = "delete emp where empno=?";
+			st = con.prepareStatement(sql);
+			st.setInt(1, empno);
+			result = st.executeUpdate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				st.close();
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
 	//사원 추가 insert
 	
 	public int insert(EmpDTO empDTO) {
 		Connection con = null;
 		PreparedStatement st = null;
 		int result = 0;
-		
+	
 		try {
 			con = DBConnector.getConnect();
 			String sql = "insert into emp(empno, ename, job, mgr, hiredate, sal, comm, deptno) "
@@ -29,7 +57,6 @@ public class EmpDAO {
 			st.setInt(5, empDTO.getSal());
 			st.setInt(6, empDTO.getComm());
 			st.setInt(7, empDTO.getDeptno());
-			
 			result = st.executeUpdate();
 			
 		} catch (Exception e) {
@@ -44,8 +71,6 @@ public class EmpDAO {
 				e.printStackTrace();
 			}
 		}
-		
-		
 		return result;
 	}
 	
@@ -89,7 +114,6 @@ public class EmpDAO {
 				e.printStackTrace();
 			}
 		}
-		
 		return ar;
 	}
 	
@@ -119,8 +143,7 @@ public class EmpDAO {
 				et.setHiredate(rs.getDate("hiredate"));
 				et.setSal(rs.getInt("sal"));
 				et.setComm(rs.getInt("comm"));
-				et.setDeptno(rs.getInt("deptno"));
-						
+				et.setDeptno(rs.getInt("deptno"));	
 			}
 
 		} catch (Exception e) {
@@ -136,7 +159,6 @@ public class EmpDAO {
 				e.printStackTrace();
 			}
 		}
-		
 		return et;
 	}
 }
