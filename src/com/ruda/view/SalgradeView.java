@@ -1,13 +1,16 @@
 package com.ruda.view;
 
+import java.util.ArrayList;
+
 import com.ruda.salgrade.SalgradeDTO;
 
 public class SalgradeView {
 	
 	//전체 조회
-	public void view() {
-		
-		
+	public void view(ArrayList<SalgradeDTO> ar) {
+		for(SalgradeDTO salgradeDTO : ar) {
+			this.view(salgradeDTO);
+			}
 	}
 	
 	
@@ -25,6 +28,4 @@ public class SalgradeView {
 		System.out.println("HISAL : "+ salgradeDTO.getHisal());
 
 	}
-	
-
 }
