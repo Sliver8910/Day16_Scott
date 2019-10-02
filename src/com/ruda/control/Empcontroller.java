@@ -58,8 +58,12 @@ public class Empcontroller {
 				
 			case 3:
 				empDTO = empInput.insert();
-				empDAO.insert(empDTO);
-				
+				select = empDAO.insert(empDTO);
+				String s = "사원정보추가실패";
+				if(select>0) {
+					s="사원정보추가성공";
+				}
+				empView.view(s);
 				break;
 
 			default:
