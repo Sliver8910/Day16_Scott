@@ -30,15 +30,17 @@ public class BonusController {
 			switch (select) {
 			case 1:
 				if(ar.size() !=0) {
-					bonusView.
+					bonusView.selectList(ar);
+				}else {
+					bonusView.view("값이 없습니다");
 				}
 				
 				break;
 			case 2:
-				String ename = bonusInput.bonusenameInput();
-				BonusDTO bonusDTO = bonusDAO.getBonusOne(ename);
+				BonusDTO bonusDTO = bonusInput.selectOne();
+				bonusDTO = bonusDAO.getBonusOne(bonusDTO.getEname());
 				if(bonusDTO !=null) {
-					
+					bonusView.SelectOne(bonusDTO);
 				}else {
 					bonusView.view("정보없음");
 				}
@@ -46,7 +48,7 @@ public class BonusController {
 				break;
 				
 			case 3:
-				bonusDTO = bonusInput.;
+				bonusDTO = bonusInput.boInsert();
 				select = bonusDAO.bonusInsert(bonusDTO);
 				String s = "보너스정보추가실패";
 				if(select>0) {
@@ -57,7 +59,13 @@ public class BonusController {
 				break;
 				
 			case 4:
-				ename = 
+				BonusDTO bonusDTO3= bonusInput.selectOne();
+				select = bonusDAO.delete(bonusDTO3.getEname());
+				String a="사원제거실패";
+				if(select>0) {
+					a="사원제거성공";
+				}
+				bonusView.view(a);
 				break;
 				
 			default:
@@ -65,13 +73,6 @@ public class BonusController {
 				check =!check;
 				break;
 			}
-			
-			
-			
-			
-			
-			
-			
 		}
 		
 		
