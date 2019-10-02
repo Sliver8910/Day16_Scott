@@ -8,12 +8,14 @@ public class FrontController {
 	private Empcontroller empcontroller;
 	private Deptcontroller deptcontroller;
 	private BonusController bonusController;
+	private SalgradeController salgradeController;
 	
 	public FrontController() {
 		sc= new Scanner(System.in);
 		empcontroller = new Empcontroller();
 		deptcontroller = new Deptcontroller();
 		bonusController = new BonusController();
+		salgradeController = new SalgradeController();
 	}
 	
 	public void start() {
@@ -23,8 +25,9 @@ public class FrontController {
 		while(check) {
 			System.out.println("1. 사원관리");
 			System.out.println("2. 부서관리");
-			System.out.println("3. 보너스 관리");
-			System.out.println("4. 종      료");
+			System.out.println("3. Salgrade 관리");
+			System.out.println("4. 보너스 관리");
+			System.out.println("5. 종      료");
 			select = sc.nextInt();
 			
 			switch (select) {
@@ -37,6 +40,10 @@ public class FrontController {
 				break;
 				
 			case 3:
+				salgradeController.start();
+				break;
+				
+			case 4:
 				bonusController.start();
 				break;
 
