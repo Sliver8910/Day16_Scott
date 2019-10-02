@@ -10,6 +10,45 @@ import com.ruda.util.DBConnector;
 
 public class EmpDAO {
 	
+	//사원 추가 insert
+	
+	public int insert(EmpDTO empDTO) {
+		Connection con = null;
+		PreparedStatement st = null;
+		int result = 0;
+		
+		try {
+			con = DBConnector.getConnect();
+			String sql = "insert into emp(empno, ename, job, mgr, hiredate, sal, comm, deptno) "
+					+"values(?, ?, ?, ?, sysdate, ?, ?, ?)";
+			st = con.prepareStatement(sql);
+			st.setInt(1, empDTO.getEmpno());
+			st.setString(2, empDTO.getEname());
+			st.setString(3, empDTO.getJob());
+			st.setInt(4, empDTO.getMgr());
+			st.setInt(5, empDTO.getSal());
+			st.setInt(6, empDTO.getComm());
+			st.setInt(7, empDTO.getDeptno());
+			
+			result = st.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				st.close();
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return result;
+	}
+	
 	//getSelectList
 	//전체사원정보 - 최신입사일순
 	public ArrayList<Object> getSelectList() {

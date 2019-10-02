@@ -23,13 +23,15 @@ public class Empcontroller {
 		Scanner sc = new Scanner(System.in);
 		EmpDAO empDAO = new EmpDAO();
 		EmpView empView = new EmpView();
+		EmpInput empInput= new EmpInput();
 		ArrayList<Object> ar = empDAO.getSelectList();
 		boolean check = true;
 		while(check) {
 
 			System.out.println("1. 사원전체정보 출력");
 			System.out.println("2. 사원검색출력");
-			System.out.println("3. 종료");
+			System.out.println("3. 사원정보 추가");
+			System.out.println("4. 종료");
 			int select = sc.nextInt();
 			switch (select) {
 
@@ -43,7 +45,7 @@ public class Empcontroller {
 				break;
 
 			case 2:
-				EmpInput empInput= new EmpInput();
+				
 				int empno = empInput.empnoInput();
 				EmpDTO empDTO = empDAO.getSelectOne(empno);
 				if(empDTO != null) {
@@ -52,6 +54,12 @@ public class Empcontroller {
 					empView.view("없는 사원 입니다");
 				}
 
+				break;
+				
+			case 3:
+				empDTO = empInput.insert();
+				empDAO.insert(empDTO);
+				
 				break;
 
 			default:

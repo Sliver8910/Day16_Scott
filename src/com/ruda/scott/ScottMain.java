@@ -1,14 +1,14 @@
 package com.ruda.scott;
 
-import com.ruda.control.Empcontroller;
+import com.ruda.control.FrontController;
+
 
 public class ScottMain {
 
 	public static void main(String[] args) {
-		Empcontroller empcontroller = new Empcontroller();
-		empcontroller.start();
-		
-	
+		FrontController frontController = new FrontController();
+		frontController.start();
+
 	}
 
 }
